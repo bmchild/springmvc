@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -90,9 +88,9 @@ public class UserDaoImplTest {
 		user.setUsername("TESTER");
 
 		User user2 = new User();
-		user.setDateCreated(new Date());
-		user.setPassword("TESTER2");
-		user.setUsername("TESTER2");
+		user2.setDateCreated(new Date());
+		user2.setPassword("TESTER2");
+		user2.setUsername("TESTER2");
 
 		userDao.insertUser(user);
 		userDao.insertUser(user2);

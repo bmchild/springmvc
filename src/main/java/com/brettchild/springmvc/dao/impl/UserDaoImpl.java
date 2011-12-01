@@ -8,13 +8,14 @@ import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.brettchild.springmvc.dao.UserDao;
 import com.brettchild.springmvc.domain.User;
 
-@Service
+@Repository
 public class UserDaoImpl implements UserDao {
 
 	private final static Logger logger = Logger.getLogger(UserDaoImpl.class);

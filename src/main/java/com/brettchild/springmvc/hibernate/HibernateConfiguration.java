@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate3.HibernateTransactionManager;
 import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean;
+import org.springframework.transaction.support.TransactionTemplate;
 
 @Configuration
 public class HibernateConfiguration {
@@ -34,6 +35,11 @@ public class HibernateConfiguration {
 	@Bean
 	public HibernateTransactionManager transactionManager() {
 		return new HibernateTransactionManager( sessionFactoryBean().getObject() );
+	}
+	
+	@Bean 
+	public TransactionTemplate transactionTemplate() {
+		return new TransactionTemplate( transactionManager() );
 	}
 
 }

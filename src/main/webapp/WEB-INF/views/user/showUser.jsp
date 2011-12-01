@@ -2,12 +2,10 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>Home</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>User</title>
 </head>
 <body>
-<h1>
-	Thing!  
-</h1>
-
+	<h1>${user}</h1>
 </body>
 </html>

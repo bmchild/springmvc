@@ -23,7 +23,6 @@ import com.brettchild.springmvc.domain.Role;
 
 @ContextConfiguration(locations = { "classpath:/spring/DaoImplTest-context.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
-@Transactional
 public class RoleDaoImplTest {
 	
 	@Autowired
@@ -40,6 +39,7 @@ public class RoleDaoImplTest {
 	}
 
 	@Test
+	@Transactional
 	public void testInsertRole() {
 		
 		Role role = new Role();
@@ -53,6 +53,7 @@ public class RoleDaoImplTest {
 	}
 
 	@Test
+	@Transactional
 	public void testGetRole() {
 		
 		Role role = new Role();
@@ -70,16 +71,17 @@ public class RoleDaoImplTest {
 	}
 
 	@Test
+	@Transactional
 	public void testGetRoles() {
 		
-		Role role = new Role();
-		role.setRoleName("TESTER");
-		role.setRoleId(0);
+		Role role1 = new Role();
+		role1.setRoleName("TESTER2");
+		role1.setRoleId(2);
 		
-		assertTrue( roleDao.insertRole(role) );
+		assertTrue( roleDao.insertRole(role1) );
 		
 		Role role2 = new Role();
-		role2.setRoleName("TESTER");
+		role2.setRoleName("TESTER1");
 		role2.setRoleId(1);
 		
 		assertTrue( roleDao.insertRole(role2) );
@@ -90,14 +92,15 @@ public class RoleDaoImplTest {
 		assertEquals(2, roles.size());
 		
 		List<String> roleIds = new ArrayList<String>(2);
-		roleIds.add( String.valueOf( role.getRoleId() ) );
+		roleIds.add( String.valueOf( role1.getRoleId() ) );
 		roleIds.add( String.valueOf( role2.getRoleId() ) );
 		
-		assertTrue( verifyDataUtil.verifyDataInTable("roleId", roleIds, role.getRoleId(), role2.getRoleId()));
+		assertTrue( verifyDataUtil.verifyDataInTable("roleId", roleIds, role1.getRoleId(), role2.getRoleId()));
 		
 	}
 
 	@Test
+	@Transactional
 	public void testUpdateRole() {
 		
 		Role role = new Role();
@@ -115,6 +118,7 @@ public class RoleDaoImplTest {
 	}
 
 	@Test
+	@Transactional
 	public void testDeleteRole() {
 		
 		Role role = new Role();

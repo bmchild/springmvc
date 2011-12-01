@@ -1,5 +1,6 @@
 package com.brettchild.springmvc.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -8,6 +9,7 @@ public class Role {
 
 	@Id
 	private Integer roleId;
+	@Column(nullable = false, length = 64, unique = true)
 	private String roleName;
 	
 	public Integer getRoleId() {

@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.LinkedHashSet;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,7 +19,9 @@ public class Recipe {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer recipeId;
+	@Column(length=64, nullable=false)
 	private String recipeName;
+	@Column(length=255, nullable=false)
 	private String recipeDirections;
 	
 	@ManyToOne(optional=false)
