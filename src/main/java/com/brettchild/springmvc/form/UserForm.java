@@ -1,14 +1,16 @@
 package com.brettchild.springmvc.form;
 
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 public class UserForm {
 
-	@NotNull
+	@NotEmpty(message = "{NotEmpty.user.username}")
 	@Size(min=3, max=20)
 	private String username;
-	@NotNull
+	@NotEmpty
+	@Size(min=3, max=20)
 	private String password;
 	
 	public String getUsername() {
