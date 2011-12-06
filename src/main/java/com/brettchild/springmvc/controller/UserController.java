@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.context.request.RequestAttributes;
 
 import com.brettchild.springmvc.domain.User;
 import com.brettchild.springmvc.form.UserForm;
@@ -25,7 +24,6 @@ import com.brettchild.springmvc.jsp.JspMessages;
 import com.brettchild.springmvc.service.UserService;
 
 @Controller
-@RequestMapping("/user")
 public class UserController {
 
 	private final String FWD_SHOWALLUSERS = "user/showAllUsers";
@@ -43,7 +41,7 @@ public class UserController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value="/user", method = RequestMethod.GET)
 	public String showAllUsers(Model model) {
 		
 		logger.debug("Entry");
@@ -63,7 +61,7 @@ public class UserController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/{userId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
 	public String update(@PathVariable String userId, Model model) {
 		
 		logger.debug("Entry");
@@ -88,7 +86,7 @@ public class UserController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/{userId}", method = RequestMethod.POST)
+	@RequestMapping(value = "/user/{userId}", method = RequestMethod.POST)
 	public String update(@PathVariable String userId, @Valid UserUpdateForm userUpdateForm, BindingResult bindingResult, Model model) {
 		
 		logger.debug("Entry");
@@ -134,7 +132,7 @@ public class UserController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/new", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/new", method = RequestMethod.GET)
 	public String addNewUser(Model model) {
 
 		logger.debug("Entry");
@@ -143,7 +141,12 @@ public class UserController {
 		return FWD_NEWUSER;
 	}
 	
-	 @ModelAttribute("userForm")
+	 /**
+	  * Used for the addNewUser.jsp for the Form
+	  * 
+	 * @return
+	 */
+	@ModelAttribute("userForm")
 	 public UserForm getUserFormObject() {
 	  return new UserForm();
 	 }
@@ -158,7 +161,7 @@ public class UserController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/new", method = RequestMethod.POST)
+	@RequestMapping(value = "/user/new", method = RequestMethod.POST)
 	public String addNewUserSubmit(@Valid UserForm userForm, BindingResult bindingResult, Model model) {
 
 		logger.debug("Entry");
@@ -193,12 +196,15 @@ public class UserController {
 	}
 	
 	/**
+	 * 
+	 * Deletes a user or adds JspMessages "errors" attribute to model
+	 * 
 	 * @param userId
 	 * @param bindingResult
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="/{userId}/delete", method= RequestMethod.GET)
+	@RequestMapping(value="/user/{userId}/delete", method= RequestMethod.GET)
 	public String deleteUser(@PathVariable String userId, Model model) {
 		
 		logger.debug("Entry");
@@ -258,6 +264,10 @@ public class UserController {
 		
 	}
 
+	/**
+	 * @param user
+	 * @return a new UserUpdateForm
+	 */
 	private UserUpdateForm createUserUpdateForm(User user) {
 		
 		UserUpdateForm userUpdateForm = new UserUpdateForm();

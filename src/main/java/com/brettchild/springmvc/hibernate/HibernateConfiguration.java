@@ -23,6 +23,7 @@ public class HibernateConfiguration {
 		Properties props = new Properties();
 		props.put("hibernate.dialect", MySQLDialect.class.getName());
 		props.put("hibernate.format_sql", "true");
+		props.put("hibernate.show.sql", "true");
 
 		AnnotationSessionFactoryBean bean = new AnnotationSessionFactoryBean();
 		bean.setPackagesToScan(new String[]{"com.brettchild.springmvc.domain"});
