@@ -235,6 +235,9 @@ public class UserController {
 		} catch(NumberFormatException e) {
 			logger.error(e.getMessage() + " on userId" + userId);
 			errors.add(new JspMessage("error.number.notvalid",  "{0} is not a valid number", userId));
+		} catch (Exception e ) {
+			e.printStackTrace();
+			errors.add(new JspMessage("error.generic.error",  e.getMessage()));
 		}
 		
 		if(!errors.isEmpty()) {

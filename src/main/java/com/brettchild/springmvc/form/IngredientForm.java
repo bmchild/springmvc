@@ -3,23 +3,35 @@ package com.brettchild.springmvc.form;
 import java.math.BigDecimal;
 
 import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class IngredientForm {
 
+	// Optional.  Validate manually if needed.
+	private Integer ingredientId;
+	
 	@NotEmpty
 	@Size(max = 64)
 	private String ingredientName;
 	
-	@NotEmpty
+	@NotNull
 	@DecimalMin(".001")
 	private BigDecimal ingredientAmount;
 	
 	@NotEmpty
 	@Size(max = 16)
 	private String unitOfMeasure;
+	
+	public Integer getIngredientId() {
+		return ingredientId;
+	}
+
+	public void setIngredientId(Integer ingredientId) {
+		this.ingredientId = ingredientId;
+	}
 
 	public String getIngredientName() {
 		return ingredientName;
@@ -47,10 +59,12 @@ public class IngredientForm {
 
 	@Override
 	public String toString() {
-		return "IngredientForm [ingredientName=" + ingredientName
-				+ ", ingredientAmount=" + ingredientAmount + ", unitOfMeasure="
-				+ unitOfMeasure + "]";
+		return "IngredientForm [ingredientId=" + ingredientId
+				+ ", ingredientName=" + ingredientName + ", ingredientAmount="
+				+ ingredientAmount + ", unitOfMeasure=" + unitOfMeasure + "]";
 	}
+
+	
 	
 	
 }

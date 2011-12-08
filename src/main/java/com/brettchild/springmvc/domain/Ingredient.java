@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.brettchild.springmvc.form.IngredientForm;
+
 @Entity
 public class Ingredient {
 
@@ -67,9 +69,21 @@ public class Ingredient {
 	@Override
 	public String toString() {
 		return "Ingredient [ingredientId=" + ingredientId + ", recipe="
-				+ recipe + ", ingredientName=" + ingredientName
+				+ recipe.getRecipeId() + ", ingredientName=" + ingredientName
 				+ ", ingredientAmount=" + ingredientAmount + ", unitOfMeasure="
 				+ unitOfMeasure + "]";
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		
+		if(obj instanceof IngredientForm 
+				&& this.getIngredientId() != null 
+				&& ((IngredientForm) obj).getIngredientId() != null) {
+			return this.getIngredientId().equals( ((IngredientForm) obj).getIngredientId() );
+		} else {
+			return super.equals(obj);
+		}
 	}
 
 }

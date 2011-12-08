@@ -13,11 +13,30 @@
 		<spring:message code="${error.code}" text="${error.message}" arguments="${error.arguments}"/>
 	</c:forEach>
 
-	<h1>${recipe.recipeName}</h1>
-	<p>
-		Created By: ${recipe.user.username}
-	</p>
+	<c:if test="${empty errors}">
 	
+		<h1>${recipe.recipeName}</h1>
+		<p>
+			<spring:url var="userUrl" value="/user/${recipe.user.userId}" />
+			Created By: <a href="${userUrl}">${recipe.user.username}</a>
+		</p>
+		
+		<h3>Directions</h3>
+		<p>
+			${recipe.recipeDirections}
+		</p>
+		
+		<h3>Ingredients:</h3>
+		<ul>
+			<c:forEach items="${recipe.ingredients}" var="ingredient">
+				<li>
+					<span class="bold">${ingredient.ingredientAmount} ${ingredient.unitOfMeasure}</span> 
+					${ingredient.ingredientName}
+				</li>
+			</c:forEach>
+		</ul>
+		
+	</c:if>
 	
 	
 </body>

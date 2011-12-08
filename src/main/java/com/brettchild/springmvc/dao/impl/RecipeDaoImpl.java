@@ -103,6 +103,7 @@ public class RecipeDaoImpl implements RecipeDao {
 
 		} catch (HibernateException e) {
 
+			e.printStackTrace();
 			logger.error(e.getMessage() + " on " + recipe.toString());
 			success = false;
 

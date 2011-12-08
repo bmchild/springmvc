@@ -1,22 +1,25 @@
 package com.brettchild.springmvc.form;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
 
 public class RecipeForm {
 
-	@NotNull
+	// Optional.  Validate manually on update. 
+	private Integer recipeId;
+	
+	@NotEmpty
 	@Size(max=64)
 	private String recipeName;
 	
-	@NotNull
+	@NotEmpty
 	@Size(max=255)
 	private String recipeDirections;
 	
@@ -27,7 +30,16 @@ public class RecipeForm {
 	@NotNull
 	@Size(min = 1)
 	@Valid
-	private Collection<IngredientForm> ingredients = new ArrayList<IngredientForm>();
+	private List<IngredientForm> ingredients;
+	
+
+	public Integer getRecipeId() {
+		return recipeId;
+	}
+
+	public void setRecipeId(Integer recipeId) {
+		this.recipeId = recipeId;
+	}
 
 	public String getRecipeName() {
 		return recipeName;
@@ -53,20 +65,22 @@ public class RecipeForm {
 		this.userId = userId;
 	}
 
-	public Collection<IngredientForm> getIngredients() {
+
+	public List<IngredientForm> getIngredients() {
 		return ingredients;
 	}
 
-	public void setIngredients(Collection<IngredientForm> ingredients) {
+	public void setIngredients(List<IngredientForm> ingredients) {
 		this.ingredients = ingredients;
 	}
 
 	@Override
 	public String toString() {
-		return "RecipeForm [recipeName=" + recipeName + ", recipeDirections="
-				+ recipeDirections + ", userId=" + userId + ", ingredients="
-				+ ingredients + "]";
+		return "RecipeForm [recipeId=" + recipeId + ", recipeName="
+				+ recipeName + ", recipeDirections=" + recipeDirections
+				+ ", userId=" + userId + ", ingredients=" + ingredients + "]";
 	}
+
 	
 	
 }
