@@ -74,7 +74,7 @@ public class RoleDaoImpl implements RoleDao {
 		try {
 
 			Session session = sessionFactory.getCurrentSession();
-			Query query = session.createQuery("from Role");
+			Query query = session.createQuery("from Role role order by role.roleId asc");
 			roles = query.list();
 			session.flush();
 

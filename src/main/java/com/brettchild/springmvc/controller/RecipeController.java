@@ -319,6 +319,19 @@ public class RecipeController {
 		
 			userId = recipe.getUser().getUserId();
 			
+			// Delete ingredients
+			Collection<Ingredient> ingredients = recipe.getIngredients();
+			int size = ingredients.size();
+			
+			Collection<Ingredient> ingredientsToDelete = new LinkedHashSet<Ingredient>(size);
+			ingredientsToDelete.addAll(ingredients);
+			
+			for( Ingredient ingredient : ingredientsToDelete ) {
+				ingredients.remove(ingredient);
+				ingredientService.deleteIngredient(ingredient);
+			}
+			
+			// Delete Recipe
 			if( !recipeService.deleteRecipe(recipe) ) {
 				errors.add(new JspMessage("error.recipe.delete.failure",  "Recipe did not delete"));
 				model.addAttribute("recipe", recipe);
@@ -354,7 +367,7 @@ public class RecipeController {
 		List<IngredientForm> ingredientsIn = recipeForm.getIngredients();
 		Collection<Ingredient> ingredientsOut = recipe.getIngredients();
 		
-		// TODO : Check for delete scenarios, exists in persistent collection but not in new
+		// Check for delete scenarios, exists in persistent collection but not in new
 		Collection<Ingredient> ingredientsToDelete = new LinkedHashSet<Ingredient>();
 		for(Ingredient ingredient : ingredientsOut) {
 			
@@ -363,7 +376,6 @@ public class RecipeController {
 			if(ingredientForm == null) {
 				ingredientsToDelete.add(ingredient);
 			}
-			
 			
 		}
 		// Now we delete
@@ -395,7 +407,7 @@ public class RecipeController {
 				
 			} else {
 				
-				//Make a new one
+				// Make a new one
 				Ingredient ingredient = new Ingredient();
 				ingredient.setIngredientAmount(ingredientIn.getIngredientAmount());
 				ingredient.setIngredientName(ingredientIn.getIngredientName());
